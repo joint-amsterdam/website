@@ -1,0 +1,65 @@
+@font-face {
+  font-family: 'PP Editorial New';
+  font-style: normal;
+  src: url('../fonts/PP Editorial New/PPEditorialNew-Regular.otf');
+}
+
+@font-face {
+  font-family: 'PP Editorial New Italic';
+  font-style: normal;
+  src: url('../fonts/PP Editorial New/PPEditorialNew-Italic.otf');
+}
+
+@font-face {
+  font-family: 'PP Neue Montreal';
+  font-style: normal;
+  src: url('../fonts/PP Neue Montreal/PPNeueMontreal-Book.otf');
+}
+
+@font-face {
+  font-family: 'PP Neue Montreal Thin';
+  font-style: normal;
+  src: url('../fonts/PP Neue Montreal/PPNeueMontreal-Thin.otf');
+}
+
+@font-face {
+  font-family: 'PP Neue Montreal Italic';
+  font-style: normal;
+  src: url('../fonts/PP Neue Montreal/PPNeueMontreal-Italic.otf');
+}
+
+@font-face {
+  font-family: 'PP Neue Montreal Arabic';
+  font-style: normal;
+  src: url('../fonts/PP Neue Montreal Arabic/PPNeueMontrealArabic-Regular.otf');
+}
+
+body {
+  margin: 0;
+  font-family: 'PP Neue Montreal';
+  font-size: 14px;
+  background-color: var(--bg-color);
+  transition: all 0.3s linear;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+*:focus {
+  outline: none;
+}
+
+/* Hide the vertical scrollbar */
+::-webkit-scrollbar {
+  width: 0;
+}
+
+/* Optional: Handle when the user hovers over the scrollbar */
+::-webkit-scrollbar:hover {
+  width: auto;
+}

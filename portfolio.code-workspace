@@ -1,0 +1,15 @@
+{
+	"folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "../../Downloads/framermotion-react-router-master"
+    }
+  ],
+	"settings": {
+		"compile-hero.disable-compile-files-on-did-save-code": true,
+        "editor.detectIndentation": false,
+        "editor.tabSize": 2
+	}
+}

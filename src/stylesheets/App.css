@@ -1,0 +1,24 @@
+.App {
+  text-align: center;
+  min-height: 100vh;
+  width: 100%;
+  top: 0;
+  position: absolute;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+:root {
+  --text-color: #000000;
+  --darker-text-color: #515c67;
+  --icon-color: #c2c2c2;
+  --slider-color: transparent;
+  --sliderIcon-color: #708090;
+  --sliderActive-color: #c2c2c2;
+  --sliderIconActive-color: #515c67;
+  --bg-color: #fff;
+  --cursor-fill: #515c67;
+  --cursor-stroke-width: 1px;
+}
