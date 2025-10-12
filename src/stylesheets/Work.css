@@ -1,0 +1,183 @@
+/* Grid Layout */
+.work {
+  margin: 0 auto;
+  max-width: 160rem;
+}
+
+.workGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  gap: 3.5rem;
+}
+
+/* Layout variations */
+.workItem {
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.workItem mux-player {
+  --controls: none;
+  --center-controls: none;
+  --bottom-play-button: none;
+}
+
+/* Wide (overlay titles) */
+.workItem.wide {
+  grid-column: span 2;
+  aspect-ratio: 16 / 9;
+}
+
+.workTitle.wide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 60%);
+  color: #fff;
+}
+
+/* Square (overlay titles) */
+.workItem.square {
+  aspect-ratio: 1 / 1;
+}
+
+.workTitle.square {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 60%);
+  color: #fff;
+}
+
+/* Square blocks */
+.workItem.square .workMediaWrapper {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.workItem.square .workImage,
+.workItem.square mux-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* WideHalf (title below media) */
+.workItem.wideHalf {
+  grid-column: span 1;
+}
+
+.workMediaWrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.workImage,
+mux-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.workTitle.wideHalf {
+  position: static;
+  margin-top: 0.5rem;
+  display: flex;
+  padding-right: 2rem;
+  flex-direction: column;
+  gap: 0.2rem;
+  color: var(--text-color);
+}
+
+/* Text styling */
+.workClient {
+  font-family: 'SpaceGrotesk Light';
+  font-size: 1.3rem;
+}
+
+.workProject {
+  font-family: 'SpaceGrotesk Medium';
+  font-size: 2.5rem;
+}
+
+/* Hover effect */
+.workItem:hover img,
+.workItem:hover mux-player {
+  transform: scale(1.02);
+  transition: transform 0.4s ease;
+}
+
+/* Target MuxPlayer inside a wideHalf item */
+.workItem.wideHalf mux-player {
+  aspect-ratio: 16 / 9;
+}
+
+/* =========================================================
+   📱 Responsive layout for screens < 768px
+   ========================================================= */
+@media (max-width: 768px) {
+  .workGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .workItem {
+    width: 100%;
+    aspect-ratio: auto;
+  }
+
+  /* Force all to look like .wide layout */
+  .workItem,
+  .workItem.wideHalf,
+  .workItem.square {
+    grid-column: span 2 !important;
+    position: relative;
+    aspect-ratio: 16 / 9;
+  }
+
+  .workTitle,
+  .workTitle.wideHalf,
+  .workTitle.square,
+  .workTitle.wide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 60%);
+    color: #fff;
+    margin: 0;
+  }
+
+  /* Make text overlay readable */
+  .workClient {
+    font-size: 1.1rem;
+  }
+
+  .workProject {
+    font-size: 2rem;
+  }
+
+  /* Ensure media fills the frame */
+  .workImage,
+  mux-player {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

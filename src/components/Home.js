@@ -1,111 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { Database } from './Database';
-import { Link, useHistory } from 'react-router-dom';
+import React from 'react';
 import { motion } from 'framer-motion';
 
-import '../stylesheets/DarkMode.css';
 import '../stylesheets/App.css';
 import '../stylesheets/Home.css';
 
-const transition = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96 ], delay: 0.3 };
-const transitionContent = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96 ] };
-const fadeTransition = { delay: 0.5, duration: 0.8, ease: 'easeOut' };
-
-
-const Home = ({ imageDetails, image }) => {
-  const items = Database;
-  const [imageSource, setImageSource] = useState('');
-  const [classImage, setClassImage] = useState('');
-  const [currentCase, setCurrentCase] = useState(1);
-  const [isTransitioning, setIsTransitioning] = useState(false); // State to track transitions
-  const [isNavigating, setIsNavigating] = useState(false);
-  const totalCases = items.length;
-  const history = useHistory();
-
-  const showImage = (item, i) => {
-    if (!isTransitioning && !isNavigating && history.location.pathname === '/') {
-      setImageSource(item.headerImage[0].url);
-      setClassImage('showcaseImage--visible');
-      setCurrentCase(i + 1);
-    }
-  };
-  
-  const hideImage = () => {
-    if (!isTransitioning) {
-      // Only hide the image if you're not navigating
-      if (!isNavigating) {
-        setImageSource('#');
-        setClassImage('');
-      }
-    }
-  };
-
-  // Use useEffect to detect route changes
-  useEffect(() => {
-    const handleRouteChangeStart = () => {
-      setIsTransitioning(true);
-    };
-
-    const handleRouteChangeComplete = () => {
-      setIsTransitioning(false);
-    };
-
-    const unlisten = history.listen((location, action) => {
-      if (action === 'PUSH' || action === 'REPLACE') {
-        // A new route is being pushed or replaced, set isNavigating to true.
-        setIsNavigating(true);
-      }
-    });
-
-    // Attach and detach event listeners
-    window.addEventListener('routeChangeStart', handleRouteChangeStart);
-    window.addEventListener('routeChangeComplete', handleRouteChangeComplete);
-
-    // Cleanup on unmount
-    return () => {
-      window.removeEventListener('routeChangeStart', handleRouteChangeStart);
-      window.removeEventListener('routeChangeComplete', handleRouteChangeComplete);
-      unlisten();
-    };
-  }, [history]);
-
+const Home = () => {
   return (
-    <div className="showcase">
-      <div className="showcaseList">
-        {items.map((item, i) =>
-          <Link to={`/portfolio/${item.slug}`} key={item.slug}>
-            <motion.div 
-              key={i} 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1, transition: fadeTransition }}
-              exit={{ opacity: 0, transition: { duration: 0.5 } }}
-              className="showcaseItem"
-              style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
-            >
-              {item.headerImage && item.headerImage[0] && (
-                <img 
-                  src={item.headerImage[0].url} 
-                  alt={item.headerImage[0].title} 
-                  className="showcaseGridImage" 
-                />
-              )}
-            </motion.div>
-
-            <motion.div 
-              key={i} 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1, transition: fadeTransition }}
-              exit={{ opacity: 0, transition: { duration: 0.5 } }}
-              className="showcaseTitle"
-            >
-              <span className="showcaseClient">{item.client}</span>
-              <span className="showcaseProject">{item.title}</span>
-            </motion.div>
-          </Link>
-        )}
-      </div>
+    <div className="home">
+      <motion.div initial="initial" animate="animate" exit="exit" className="homeContainer">
+        <div className='homeTitle'>
+          <span>Welcome to Joint</span>
+        </div>
+        <span className='homeDescription'>
+          <p>video slider</p>
+          <p>description:</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras erat massa, dapibus sit amet ante non, convallis vehicula ex. Nulla sagittis feugiat neque vitae dictum. Pellentesque pulvinar, urna a dignissim tempus, diam leo suscipit augue, ac pretium mauris velit quis purus. Cras fringilla sed justo sed laoreet. Curabitur posuere in velit at mollis. 
+            Vestibulum eget venenatis purus. Donec sagittis, leo at elementum feugiat, felis ligula luctus libero, nec congue est odio sed risus. In hac habitasse platea dictumst. Sed ullamcorper nisl in condimentum cursus. Sed malesuada laoreet semper. Aenean lorem dui, tristique vitae sem ut, semper consequat justo. Nulla turpis dolor, semper id urna vel, consequat imperdiet mi.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin iaculis, ligula quis aliquam porttitor, justo nisl gravida quam, id interdum dolor leo id sem. In hac habitasse platea dictumst. 
+            Sed tincidunt, libero ut venenatis ornare, orci orci imperdiet enim, in varius ex tortor eget nulla. Nullam eleifend bibendum volutpat. Etiam pellentesque malesuada dui, nec venenatis lacus tempus vel. Aenean imperdiet scelerisque dignissim. 
+          </p>
+        </span>
+      </motion.div>
     </div>
   );
-};
+}
 
 export default Home;
+
+
+

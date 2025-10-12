@@ -1,150 +1,145 @@
+/* --- Container --- */
 .navContainer {
-  align-items: center;
-  font-family: 'PP Neue Montreal Thin';
-  height: 4rem;
-  background-color: var(--bg-color);
-  transition: all 0.3s linear;
-  width: auto;
-  position: static;
-  z-index: 9999;
-  top: 2vw;
-}
-  
-.navTopContainer {
+  width: 100%;
+  font-family: 'SpaceGrotesk Medium';
   position: fixed;
-  z-index: 999;
-  width: 100vw;
-  height: 4rem;
-  transition: all 0.3s linear;
-  background-color: var(--bg-color);
   top: 0;
-  display: flex;
+  left: 0;
+  z-index: 9999;
 }
 
+/* --- Top bar --- */
+.navTopContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px; /* increased height to give padding */
+  background: transparent;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+/* --- Links --- */
 .navLinks {
   display: flex;
-  flex-direction: row;
-  text-align: left;
-  position: absolute;
-  z-index: 999;
+  gap: 1rem;
   font-size: 14px;
-  font-family: 'PP Neue Montreal Thin';
-  right: 4vw;
-  align-self: center;
+  align-items: center;
 }
 
-.navLink{
-  padding: 0 0 0 0.5rem;
-}
-  
-.navLink, a {
-  color:  var(--text-color);
-  transition: all 0.3s linear;
+.navLink {
+  color: var(--text-key-color);
   text-decoration: none;
+  transition: opacity 0.4s ease;
 }
 
+.navLink:hover {
+  opacity: 0.7;
+}
+
+/* --- Logo --- */
 .navLogo {
-  position: absolute;
-  z-index: 999;
-  left: 4vw;
-  font-size: 1rem;
-  text-align: right;
-  line-height: 1rem;
   display: flex;
-  align-self: center;
+  align-items: center;
+  height: 40px;
+  padding-top: 5px; /* adds some space above logo/icon */
+}
+
+.navLogo.iconAlignLeft {
+  justify-content: flex-start; /* icon aligns left on scroll */
 }
 
 .navLogoLink {
-  flex-direction: row;
+  position: relative;
   display: flex;
+  align-items: center;
+  width: 140px;
+  height: 40px;
 }
 
-.navName {
-  font-weight: 500;
-  display: flex;
-  padding: 0 0.5rem 0 0;
-  font-size: 14px;
-  font-family: 'PP Neue Montreal Medium';
+/* Stacked logos */
+.navLogoImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  object-fit: contain;
+  color: var(--text-key-color);
+  transition: opacity 0.3s ease;
 }
 
-.navJobtitle {
-  font-size: 14px;
-  display: flex;
-  text-align: left;
-  font-family: 'PP Neue Montreal Thin';
+.iconImage {
+  height: 20px;
+  padding-top: 5px;
+  padding-left: 6px;
 }
 
+.logoImage {
+  height: 30px;
+}
+
+.logoFade--visible {
+  opacity: 1;
+  z-index: 2;
+}
+
+.logoFade--hidden {
+  opacity: 0;
+  z-index: 1;
+}
+
+/* --- Dark mode toggle (bottom right) --- */
 .navColorChange {
   position: fixed;
-  z-index: 999;
-  width: 100vw;
-  height: 4rem;
-  transition: all 0.3s linear;
-  background-color: var(--bg-color);
-  bottom: 0;
+  bottom: 1rem;
+  right: 2rem;
+  z-index: 99999;
 }
 
 .navDarkMode {
-  position: fixed;
-  z-index: 999;
-  width: 2rem;        /* give a bit more space */
-  height: 2rem;
-  bottom: 1rem;
-  right: 4vw;
-  border: none;
-  background: transparent;  /* remove bg color to avoid flash */
-  cursor: pointer;
+  width: 1.2rem; 
+  height: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;   /* hide any overflow during transitions */
+  cursor: pointer;
+  position: relative;
 }
 
-.navSun,
-.navMoon {
-  height: 1rem;
-  width: 1rem;
-  fill: var(--text-color);
-  transition: transform 0.6s ease, opacity 0.6s ease;
-  opacity: 0;
+.navThemeIcon {
   position: absolute;
+  width: 100%;
+  height: 100%;
+  fill: var(--text-key-color);
+  transition: opacity 0.3s ease;
 }
 
-.navSun--dark {
+.themeVisible {
   opacity: 1;
-  transform: translateY(0);
-  position: relative;
-  transition-delay: 0.3s; /* slightly longer delay on appear */
+  z-index: 2;
 }
 
-.navMoon--dark {
-  opacity: 1;
-  transform: translateY(0);
-  position: relative;
-  transition-delay: 0.3s;
+.themeHidden {
+  opacity: 0;
+  z-index: 1;
 }
 
+/* --- Desktop adjustments --- */
 @media screen and (min-width: 1024px) {
-  .navContainer {
-    align-items: center;
-    font-family: 'PP Neue Montreal';
-    height: 5rem;
-    background-color: var(--bg-color);
-    width: auto;
-    position: absolute;
-    z-index: initial;
-    top: 2vw;
+  .navTopContainer {
+    height: 50px;
   }
 
-  .navColorChange {
-    background-color: var(--bg-color);
+  .navLogo {
+    height: 40px;
+    padding-top: 5px;
   }
-
-  .navName {
-    padding: 0 1rem 0 0;
-  }
-
-  .navLink{
-    padding: 0 0 0 0.5rem;
 }
+
+@media screen and (max-width: 1023px) {
+  .iconImage {
+    height: 10px;
+    padding-top: 14px;
+  }
 }

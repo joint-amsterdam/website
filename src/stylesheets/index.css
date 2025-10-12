@@ -1,42 +1,36 @@
 @font-face {
-  font-family: 'PP Editorial New';
+  font-family: 'SpaceGrotesk Bold';
   font-style: normal;
-  src: url('../fonts/PP Editorial New/PPEditorialNew-Regular.otf');
+  src: url('../fonts/SpaceGrotesk-Bold.ttf');
 }
 
 @font-face {
-  font-family: 'PP Editorial New Italic';
+  font-family: 'SpaceGrotesk Light';
   font-style: normal;
-  src: url('../fonts/PP Editorial New/PPEditorialNew-Italic.otf');
+  src: url('../fonts/SpaceGrotesk-Light.ttf');
 }
 
 @font-face {
-  font-family: 'PP Neue Montreal';
+  font-family: 'SpaceGrotesk Medium';
   font-style: normal;
-  src: url('../fonts/PP Neue Montreal/PPNeueMontreal-Book.otf');
+  src: url('../fonts/SpaceGrotesk-Medium.ttf');
 }
 
 @font-face {
-  font-family: 'PP Neue Montreal Thin';
+  font-family: 'SpaceGrotesk Regular';
   font-style: normal;
-  src: url('../fonts/PP Neue Montreal/PPNeueMontreal-Thin.otf');
+  src: url('../fonts/SpaceGrotesk-Regular.ttf');
 }
 
 @font-face {
-  font-family: 'PP Neue Montreal Italic';
+  font-family: 'SpaceGrotesk SemiBold';
   font-style: normal;
-  src: url('../fonts/PP Neue Montreal/PPNeueMontreal-Italic.otf');
-}
-
-@font-face {
-  font-family: 'PP Neue Montreal Arabic';
-  font-style: normal;
-  src: url('../fonts/PP Neue Montreal Arabic/PPNeueMontrealArabic-Regular.otf');
+  src: url('../fonts/SpaceGrotesk-SemiBold.ttf');
 }
 
 body {
   margin: 0;
-  font-family: 'PP Neue Montreal';
+  font-family: 'SpaceGrotesk Regular';
   font-size: 14px;
   background-color: var(--bg-color);
   transition: all 0.3s linear;

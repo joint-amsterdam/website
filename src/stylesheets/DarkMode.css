@@ -1,5 +1,7 @@
 :root[data-theme='light'] {    
     --text-color: #000000;
+    --text-color-inverted: #ffffff;
+    --text-key-color: #F7B637;
     --darker-text-color: #515c67;
     --icon-color: #c2c2c2;
     --slider-color: transparent;
@@ -13,6 +15,8 @@
 
 :root[data-theme='dark'] {   
     --text-color: #eee;
+    --text-color-inverted: #000000;
+    --text-key-color: #24C600;
     --darker-text-color: #fff;
     --icon-color: #c2c2c2;
     --slider-color: transparent;

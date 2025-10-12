@@ -12,7 +12,7 @@ ReactDOM.render(
   <Router history={history}>
     <App />
   </Router>,
-  document.getElementById('root'),
+  document.getElementById('Joint'),
 );
 
 // If you want your app to work offline and load faster, you can change

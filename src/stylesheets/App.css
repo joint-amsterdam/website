@@ -1,9 +1,10 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
   min-height: 100vh;
   width: 100%;
   top: 0;
   position: absolute;
+  padding-bottom: 2rem;
 }
 
 .bold {

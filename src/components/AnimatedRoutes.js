@@ -3,6 +3,7 @@ import { Switch, Route, useLocation } from 'react-router-dom';
 import Home from '../components/Home';
 import CaseDetail from './CaseDetail';
 import About from '../components/About';
+import Work from '../components/Work';
 import { AnimatePresence } from 'framer-motion';
 
 function AnimatedRoutes() {
@@ -33,6 +34,7 @@ function AnimatedRoutes() {
     <AnimatePresence initial={false}>
       <Switch location={location} key={location.pathname} >
         <Route exact path="/" render={() => <Home imageDetails={imageDetails} />} />
+        <Route path="/work" render={() => <Work />} />
         <Route path="/about" render={() => <About />} />
         <Route path="/portfolio/:id" render={() => <CaseDetail imageDetails={imageDetails} />} />
         <Route path="*" render={() => <Home imageDetails={imageDetails} />} />

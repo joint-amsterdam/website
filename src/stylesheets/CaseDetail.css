@@ -1,0 +1,224 @@
+.caseDetail {
+  width: 100vw;
+  font-family: 'SpaceGrotesk Light';
+}
+
+/* --- Container --- */
+.caseDetailContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 160rem;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* --- Header Section --- */
+.caseDetailHeader {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  z-index: 200;
+}
+
+/* Header wrapper — fixed max height */
+.caseDetailHeaderContent {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-height: 30rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Video container fills frame */
+.caseDetailHeaderImageContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* --- Mux player / image fills completely --- */
+.caseDetailHeaderImageContainer > mux-player,
+.caseDetailHeaderImageContainer > img,
+.caseDetailHeaderImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* crops sides, fills full frame */
+  object-position: center center;
+  display: block;
+  background: black;
+  border: none;
+}
+
+.caseDetailHeaderImageContainer .muxWrapper mux-player {
+  /* Hide all controls at once */
+  --controls: none;
+  --center-controls: none;
+  --bottom-play-button: none;
+}
+
+/* --- Top Section --- */
+.caseDetailTopContent {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  padding: 0 2rem;
+}
+
+.caseDetailItemContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.caseDetailLeft {
+  flex: 1;
+  min-width: 20rem;
+  margin-right: 2rem;
+  padding-right: 1rem;
+}
+
+.caseDetailRight {
+  flex: 1;
+  min-width: 20rem;
+}
+
+.caseDetailTitle {
+  font-family: 'SpaceGrotesk Medium';
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.caseDetailMetadata > div {
+  margin-bottom: 0.5rem;
+  color: var(--darker-text-color);
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.caseDetailDescription {
+  font-family: 'SpaceGrotesk Light';
+  color: var(--darker-text-color);
+  line-height: 1.5;
+}
+
+/* --- Middle Section Video --- */
+.caseDetailMiddleVideo {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 0;
+  overflow: hidden;
+  padding: 0 2rem 0 2rem;
+}
+
+.caseDetailMiddleVideo mux-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: transparent;
+}
+
+
+.caseDetailMiddleVideoWrapper {
+  position: relative;
+  width: auto;
+  margin: 3rem 2rem;
+  overflow: hidden;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.caseDetailMiddleVideoWrapper mux-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* crops to fill container */
+}
+
+.caseDetailContentVideoWrapper {
+  position: relative;
+  width: auto;
+  overflow: hidden;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.caseDetailContentVideoWrapper mux-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* crops to fill container */
+}
+
+
+/* --- WYSIWYG --- */
+.caseDetailBottomContent {
+  padding: 2rem;
+  max-width: 80vw;
+  margin: 0 auto;
+  text-align: left;
+  line-height: 1.6;
+  color: var(--darker-text-color);
+}
+
+.caseDetailBottomContent img {
+  max-width: 100%;
+  height: auto;
+  margin: 2rem 0;
+  display: block;
+  object-fit: cover;
+}
+
+/* --- Back Button --- */
+.caseDetailButtons {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 4rem;
+  padding-left: 2rem;
+  z-index: 99999;
+  position: relative;
+}
+
+.caseDetailBackButton a {
+  font-family: 'SpaceGrotesk Light';
+  text-decoration: none;
+  color: var(--text-color);
+  transition: opacity 0.3s ease;
+}
+
+.caseDetailBackButton a:hover {
+  opacity: 0.7;
+}
+
+/* --- Responsive --- */
+@media screen and (max-width: 1023px) {
+  .caseDetailTopContent {
+    flex-direction: column;
+  }
+
+  .caseDetailLeft,
+  .caseDetailRight {
+    margin-right: 0;
+    margin-bottom: 2rem;
+  }
+
+  .caseDetailBottomContent {
+    max-width: 100%;
+    padding: 0 2rem;
+  }
+}
+

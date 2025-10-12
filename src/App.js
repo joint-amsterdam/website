@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Nav from './components/Nav';
 import ScrollManager from './components/Scrollmanager';
 import AnimatedRoutes from './components/AnimatedRoutes';
+import '@mux/mux-player';
 
 import './stylesheets/App.css';
 
