@@ -1,116 +1,183 @@
+/* Grid Layout */
 .home {
-  width: 100vw;
-  /* background-color:teal; */
+  margin: 0 auto;
+  max-width: 160rem;
 }
 
-.homeContainer {
-  display: flex;
-  flex-direction: column;
-  width: 80vw;
-  margin: 15vh auto 4rem;
-  flex-wrap: wrap;
-  flex-direction: row;
+.homeGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  gap: 3.5rem;
 }
 
-.homeTitle {
-  font-size: 30px;
-  color: var(--text-color);
-  transition: all 0.3s linear;
-  padding-bottom: 1rem;
-  display: flex;
-  align-self: center;
-  flex: 0 0 100%;
-  justify-content: center;
-}
-
-.homeDescription {
-  font-size: 14px;
-  font-weight: normal;    
-  color: var(--text-color);
-  transition: all 0.3s linear;
-  /* width: 50vw; */
-  width: 80vw;
+/* Layout variations */
+.homeItem {
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
   display: flex;
   flex-direction: column;
 }
 
-@media screen and (max-width: 767px) {
-  .homeContainer {
+.homeItem mux-player {
+  --controls: none;
+  --center-controls: none;
+  --bottom-play-button: none;
+}
+
+/* Wide (overlay titles) */
+.homeItem.wide {
+  grid-column: span 2;
+  aspect-ratio: 16 / 9;
+}
+
+.homeTitle.wide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 60%);
+  color: #fff;
+}
+
+/* Square (overlay titles) */
+.homeItem.square {
+  aspect-ratio: 1 / 1;
+}
+
+.homeTitle.square {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 60%);
+  color: #fff;
+}
+
+/* Square blocks */
+.homeItem.square .homeMediaWrapper {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.homeItem.square .homeImage,
+.homeItem.square mux-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* WideHalf (title below media) */
+.homeItem.wideHalf {
+  grid-column: span 1;
+}
+
+.homeMediaWrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.homeImage,
+mux-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.homeTitle.wideHalf {
+  position: static;
+  margin-top: 0.5rem;
+  display: flex;
+  padding-right: 2rem;
+  flex-direction: column;
+  gap: 0.2rem;
+  color: var(--text-color);
+}
+
+/* Text styling */
+.homeClient {
+  font-family: 'SpaceGrotesk Light';
+  font-size: 1.3rem;
+}
+
+.homeProject {
+  font-family: 'SpaceGrotesk Medium';
+  font-size: 2.5rem;
+}
+
+/* Hover effect */
+.homeItem:hover img,
+.homeItem:hover mux-player {
+  transform: scale(1.02);
+  transition: transform 0.4s ease;
+}
+
+/* Target MuxPlayer inside a wideHalf item */
+.homeItem.wideHalf mux-player {
+  aspect-ratio: 16 / 9;
+}
+
+/* =========================================================
+   📱 Responsive layout for screens < 768px
+   ========================================================= */
+@media (max-width: 768px) {
+  .homeGrid {
+    display: flex;
     flex-direction: column;
-    height: auto;
-    flex-wrap: nowrap;
+    gap: 2.5rem;
   }
 
-  .homeTitle {
-    font-size: 30px;
-    justify-content: space-between;
-    width: 80vw;
-    flex: 0 0 0;
+  .homeItem {
+    width: 100%;
+    aspect-ratio: auto;
   }
 
-  .homeDescription {
-    width: 80vw;
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-  .homeContainer {
-    flex-direction: row;
-    height: auto;
-    flex-wrap: wrap;
+  /* Force all to look like .wide layout */
+  .homeItem,
+  .homeItem.wideHalf,
+  .homeItem.square {
+    grid-column: span 2 !important;
+    position: relative;
+    aspect-ratio: 16 / 9;
   }
 
-  .homeTitle {
-    font-size: 40px;
-    display: flex;
-    align-self: center;
-    justify-content: space-between;
-    width: 50vw;
-  }
-
-  .homeDescription {
-    /* width: 40vw; */
-    width: 80vw;
-    padding: 0 5vw;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-
-  .homeArabic {
-    font-family: 'PP Neue Montreal Arabic';
-    padding-left: 15rem;
-  }
-
-  .homeTitle {
-    font-size: 30px;
-    color: var(--text-color);
-    transition: all 0.3s linear;
-    padding-bottom: 3rem;
-    display: flex;
-    align-self: center;
-  }
-
-  .homeDescription {
-    font-size: 14px;
-    font-weight: normal;    
-    color: var(--text-color);
-    transition: all 0.3s linear;
-    width: 80vw;
-    /* width: 40vw; */
-    padding: 0 5vw;
+  .homeTitle,
+  .homeTitle.wideHalf,
+  .homeTitle.square,
+  .homeTitle.wide {
+    position: absolute;
+    inset: 0;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 60%);
+    color: #fff;
+    margin: 0;
   }
-  
-  .homeDescription p {
-    margin: 0 0 2rem 0;
-  }
-  
-}
 
-@media screen and (min-width: 1440px) {
-  /* .homePhoto {
-    width: 20vw;
-  } */
+  /* Make text overlay readable */
+  .homeClient {
+    font-size: 1.1rem;
+  }
+
+  .homeProject {
+    font-size: 2rem;
+  }
+
+  /* Ensure media fills the frame */
+  .homeImage,
+  mux-player {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }

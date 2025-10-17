@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as MoonIcon } from '../icons/moon.svg';
 import { ReactComponent as SunIcon } from '../icons/sun.svg';
-import iconImage from '../images/icon_joint.svg';
-import logoImage from '../images/logo_joint.svg';
 
 import '../stylesheets/Navigation.css';
 import '../stylesheets/DarkMode.css';

@@ -1,0 +1,182 @@
+/* --- MENU BUTTON --- */
+.menu-button {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  width: 27px;
+  height: 27px;
+  cursor: pointer;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-line {
+  position: absolute;
+  width: 26px;
+  height: 2px;
+  background-color: var(--text-key-color);
+  transition: all 0.4s ease;
+}
+
+.menu-line.line1 {
+  transform: rotate(0deg);
+}
+
+.menu-line.line2 {
+  transform: rotate(90deg);
+}
+
+/* When menu is open, rotate + into X */
+.menu-button.open .line1 {
+  transform: rotate(45deg);
+  background-color: var(--text-color-inverted);
+}
+
+.menu-button.open .line2 {
+  transform: rotate(-45deg);
+  background-color: var(--text-color-inverted);
+}
+
+/* --- OVERLAY --- */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--text-key-color);
+  color: white;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.05);
+  transition: all 0.6s ease;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 2rem;
+}
+
+.menu-overlay.show {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+/* --- LOGO TOP LEFT --- */
+.menu-logo {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+}
+
+.menuLogoImage {
+  width: 10rem;
+  color: var(--text-color-inverted);
+}
+
+/* --- MENU LINKS (bottom right) --- */
+.menu-links {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  text-align: right;
+}
+
+.menu-links a {
+  display: block;
+  font-size: 1.5rem;
+  text-transform: lowercase;
+  color: var(--text-color-inverted);
+  text-decoration: none;
+  margin: 0.3rem 0;
+  transition: color 0.3s ease;
+}
+
+.menu-links a:hover {
+  color: var(--text-color);
+}
+
+/* --- ABOUT CONTENT (bottom left) --- */
+.menu-about-content {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  line-height: 1.4;
+  max-width: 400px;
+}
+
+/* --- ICON ON MAIN PAGE --- */
+.main-logo-icon {
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  z-index: 999;
+  color: var(--text-color);
+}
+
+.logoIconImage {
+  width: 1.5rem;
+  height: auto;
+  color: var(--text-key-color);
+  transition: opacity 0.3s ease;
+}
+
+/* --- RIGHT COLUMN (Dark Mode + Menu Links) --- */
+.menu-right-column {
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+/* --- DARK MODE --- */
+.menu-darkmode {
+  font-size: 1.5rem;
+  color: var(--text-key-color);
+}
+
+
+/* --- Dark mode toggle (bottom right) --- */
+.navColorChange {
+  display: flex;
+  justify-content: flex-end;
+  z-index: 99999;
+}
+
+.navDarkMode {
+  width: 1.2rem; 
+  height: 1.2rem;
+  padding-bottom: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.navThemeIcon {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  fill: var(--text-color-inverted);
+  transition: opacity 0.3s ease;  
+  transition: color 0.3s ease;
+}
+
+.navThemeIcon:hover {
+  fill: var(--text-color);
+}
+
+.themeVisible {
+  opacity: 1;
+  z-index: 2;
+}
+
+.themeHidden {
+  opacity: 0;
+  z-index: 1;
+}

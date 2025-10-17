@@ -1,4 +1,16 @@
 .caseDetail {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+
+.caseDetail.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.caseDetail {
   width: 100vw;
   font-family: 'SpaceGrotesk Light';
 }
@@ -15,16 +27,9 @@
 /* --- Header Section --- */
 .caseDetailHeader {
   position: relative;
-  width: 100%;
+  width: 100vw;
   overflow: hidden;
   z-index: 200;
-}
-
-/* Header wrapper — fixed max height */
-.caseDetailHeaderContent {
-  position: relative;
-  width: 100%;
-  height: auto;
   max-height: 30rem;
   overflow: hidden;
   display: flex;

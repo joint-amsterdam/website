@@ -10,14 +10,18 @@ import '../stylesheets/Work.css';
 
 const fadeTransition = { delay: 0.5, duration: 0.8, ease: 'easeOut' };
 
-// Custom MuxVideo component
 const MuxVideo = ({ playbackId }) => {
   const playerRef = useRef();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const posterUrl = `https://image.mux.com/${playbackId}/thumbnail.jpg`;
 
   useEffect(() => {
     const el = playerRef.current;
     if (!el) return;
 
+    const handleLoadedData = () => setIsLoaded(true);
+
+    el.addEventListener('loadeddata', handleLoadedData);
     el.muted = true;
     el.play().catch(() => {});
 
@@ -28,21 +32,48 @@ const MuxVideo = ({ playbackId }) => {
       }
     };
     el.addEventListener('timeupdate', handleTimeUpdate);
-    return () => el.removeEventListener('timeupdate', handleTimeUpdate);
+
+    return () => {
+      el.removeEventListener('timeupdate', handleTimeUpdate);
+      el.removeEventListener('loadeddata', handleLoadedData);
+    };
   }, []);
 
   return (
-    <mux-player
-      ref={playerRef}
-      playback-id={playbackId}
-      autoPlay
-      muted
-      loop={false}
-      no-controls
-      style={{ width: '100%', height: '100%' }}
-    />
+    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+      {!isLoaded && (
+        <img
+          src={posterUrl}
+          alt="Video preview"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            position: 'absolute',
+            inset: 0,
+          }}
+        />
+      )}
+      <mux-player
+        ref={playerRef}
+        playback-id={playbackId}
+        autoPlay
+        muted
+        loop={false}
+        no-controls
+        playsinline
+        poster={posterUrl}
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          visibility: isLoaded ? 'visible' : 'hidden',
+        }}
+      />
+    </div>
   );
 };
+
 
 const Home = () => {
   const [cases, setCases] = useState([]);
@@ -89,8 +120,8 @@ const Home = () => {
             </div>
 
             <div className={`workTitle ${item.layoutType || 'wide'}`}>
-              <span className="workClient">{item.client}</span>
               <span className="workProject">{item.title}</span>
+              <span className="workClient">{item.client}</span>
             </div>
           </Link>
         ))}

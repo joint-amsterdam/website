@@ -1,31 +1,269 @@
-import React from 'react';
+// src/components/Home.js
+import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { client, urlFor } from './sanityClient';
 
+import '../stylesheets/DarkMode.css';
 import '../stylesheets/App.css';
 import '../stylesheets/Home.css';
 
-const Home = () => {
+const fadeTransition = { delay: 0.5, duration: 0.8, ease: 'easeOut' };
+
+const MuxVideo = ({ playbackId }) => {
+  const playerRef = useRef();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const posterUrl = `https://image.mux.com/${playbackId}/thumbnail.jpg`;
+
+  useEffect(() => {
+    const el = playerRef.current;
+    if (!el) return;
+
+    const handleLoadedData = () => setIsLoaded(true);
+
+    el.addEventListener('loadeddata', handleLoadedData);
+    el.muted = true;
+    el.play().catch(() => {});
+
+    const handleTimeUpdate = () => {
+      if (el.currentTime >= 5) {
+        el.currentTime = 0;
+        el.play();
+      }
+    };
+    el.addEventListener('timeupdate', handleTimeUpdate);
+
+    return () => {
+      el.removeEventListener('timeupdate', handleTimeUpdate);
+      el.removeEventListener('loadeddata', handleLoadedData);
+    };
+  }, []);
+
   return (
-    <div className="home">
-      <motion.div initial="initial" animate="animate" exit="exit" className="homeContainer">
-        <div className='homeTitle'>
-          <span>Welcome to Joint</span>
-        </div>
-        <span className='homeDescription'>
-          <p>video slider</p>
-          <p>description:</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras erat massa, dapibus sit amet ante non, convallis vehicula ex. Nulla sagittis feugiat neque vitae dictum. Pellentesque pulvinar, urna a dignissim tempus, diam leo suscipit augue, ac pretium mauris velit quis purus. Cras fringilla sed justo sed laoreet. Curabitur posuere in velit at mollis. 
-            Vestibulum eget venenatis purus. Donec sagittis, leo at elementum feugiat, felis ligula luctus libero, nec congue est odio sed risus. In hac habitasse platea dictumst. Sed ullamcorper nisl in condimentum cursus. Sed malesuada laoreet semper. Aenean lorem dui, tristique vitae sem ut, semper consequat justo. Nulla turpis dolor, semper id urna vel, consequat imperdiet mi.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin iaculis, ligula quis aliquam porttitor, justo nisl gravida quam, id interdum dolor leo id sem. In hac habitasse platea dictumst. 
-            Sed tincidunt, libero ut venenatis ornare, orci orci imperdiet enim, in varius ex tortor eget nulla. Nullam eleifend bibendum volutpat. Etiam pellentesque malesuada dui, nec venenatis lacus tempus vel. Aenean imperdiet scelerisque dignissim. 
-          </p>
-        </span>
-      </motion.div>
+    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+      {!isLoaded && (
+        <img
+          src={posterUrl}
+          alt="Video preview"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            position: 'absolute',
+            inset: 0,
+          }}
+        />
+      )}
+      <mux-player
+        ref={playerRef}
+        playback-id={playbackId}
+        autoPlay
+        muted
+        loop={false}
+        no-controls
+        playsinline
+        poster={posterUrl}
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          visibility: isLoaded ? 'visible' : 'hidden',
+        }}
+      />
     </div>
   );
-}
+};
+
+
+const Home = () => {
+  const [cases, setCases] = useState([]);
+
+  useEffect(() => {
+    client
+      .fetch(`*[_type == "case" && (!defined(archived) || archived == false)] | order(order asc){
+        title,
+        slug,
+        client,
+        layoutType,
+        order,
+        headerImage,
+        headerVideo{
+          asset->{
+            _id,
+            playbackId
+          }
+        }
+      }`)
+      .then((data) => setCases(data))
+      .catch((err) => console.error(err));
+  }, []);
+
+  return (
+    <div className="home">
+      <div className="homeGrid">
+        {cases.map((item) => (
+          <Link
+            to={`/portfolio/${item.slug.current}`}
+            key={item.slug.current}
+            className={`homeItem ${item.layoutType || 'wide'}`} // wide / square / wideHalf
+          >
+            <div className="homeMediaWrapper">
+              {item.headerVideo?.asset?.playbackId ? (
+                <MuxVideo playbackId={item.headerVideo.asset.playbackId} />
+              ) : item.headerImage?.length ? (
+                <img
+                  src={urlFor(item.headerImage[0]).url()}
+                  alt={item.headerImage[0].alt || item.title}
+                  className="homeImage"
+                />
+              ) : null}
+            </div>
+
+            <div className={`homeTitle ${item.layoutType || 'wide'}`}>
+              <span className="homeClient">{item.client}</span>
+              <span className="homeProject">{item.title}</span>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default Home;
 
 
 
+// import React, { useState, useEffect, useRef } from 'react';
+// import { PortableText } from '@portabletext/react';
+// import { client, urlFor } from './sanityClient';
+// import '../stylesheets/App.css';
+// import '../stylesheets/Home.css';
+
+// const MuxVideo = ({ playbackId }) => {
+//   const playerRef = useRef();
+
+//   useEffect(() => {
+//     const el = playerRef.current;
+//     if (!el) return;
+
+//     el.muted = true;
+//     el.play().catch(() => {});
+
+//     const handleTimeUpdate = () => {
+//       if (el.currentTime >= 5) {
+//         el.currentTime = 0;
+//         el.play();
+//       }
+//     };
+
+//     el.addEventListener('timeupdate', handleTimeUpdate);
+//     return () => el.removeEventListener('timeupdate', handleTimeUpdate);
+//   }, []);
+
+//   return (
+//     <mux-player
+//       ref={playerRef}
+//       playback-id={playbackId}
+//       autoPlay
+//       muted
+//       loop={false}
+//       no-controls
+//       style={{ width: '100%', height: '100%' }}
+//     />
+//   );
+// };
+
+// const ptComponents = {
+//   types: {
+//     image: ({ value }) =>
+//       value?.asset?._ref ? (
+//         <img
+//           src={urlFor(value).width(1200).url()}
+//           alt={value.alt || ''}
+//           style={{ maxWidth: '100%', margin: '2rem 0', display: 'block' }}
+//         />
+//       ) : null,
+
+//     'mux.video': ({ value }) =>
+//       value?.asset?.playbackId ? (
+//         <div className="homeMuxVideoWrapper">
+//           <mux-player
+//             playback-id={value.asset.playbackId}
+//             stream-type="on-demand"
+//             controls
+//             playsinline
+//             preload="metadata"
+//             style={{
+//               width: '100%',
+//               maxHeight: '30rem',
+//               height: 'auto',
+//               objectFit: 'cover',
+//               backgroundColor: 'black',
+//             }}
+//           />
+//         </div>
+//       ) : null,
+//   },
+// };
+
+// const Home = () => {
+//   const [home, setHome] = useState([]);
+
+//   useEffect(() => {
+//     client
+//       .fetch(`*[_type == "home" && (!defined(archived) || archived == false)]{
+//         title,
+//         tagline,
+//         headerImage,
+//         headerVideo{
+//           asset->{
+//             _id,
+//             playbackId
+//           }
+//         },
+//         description[]{
+//           ...,
+//           _type == "mux.video" => {
+//             ...,
+//             asset->{ playbackId }
+//           }
+//         }
+//       }`)
+//       .then((data) => setHome(data))
+//       .catch((err) => console.error(err));
+//   }, []);
+
+//   return (
+//     <div className="home">
+//       <div className="homeContainer">
+//         {home.map((item, index) => (
+//           <div key={index} className="homeItem">
+
+//             {item.headerVideo?.asset?.playbackId ? (
+//               <MuxVideo playbackId={item.headerVideo.asset.playbackId} />
+//             ) : item.headerImage ? (
+//               <img
+//                 src={urlFor(item.headerImage).url()}
+//                 alt={item.title}
+//                 className="homeHeaderImage"
+//               />
+//             ) : null}
+
+//             {/* {item.title && <h2 className="homeTitle">{item.title}</h2>} */}
+
+//             {item.description && (
+//               <div className="homeDescription">
+//                 <PortableText value={item.description} components={ptComponents} />
+//               </div>
+//             )}
+
+//             {item.tagline && <div className="homeTagline">{item.tagline}</div>}
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Home;

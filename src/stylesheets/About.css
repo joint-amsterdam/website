@@ -1,57 +1,42 @@
-.about {
+/* .about {
   width: 100vw;
-  /* background-color:teal; */
-}
+} */
 
 .aboutContainer {
   display: flex;
-  flex-direction: column;
-  width: 80vw;
-  margin: 15vh auto 4rem;
-  flex-wrap: wrap;
-  flex-direction: row;
+  width: auto;
+  margin: 0 2rem;
+  align-items: center;
+  height: 100vh;
 }
 
 .aboutTitle {
-  font-size: 30px;
+  font-size: 1.5rem;
   color: var(--text-color);
   transition: all 0.3s linear;
   padding-bottom: 1rem;
   display: flex;
-  align-self: center;
-  flex: 0 0 100%;
-  justify-content: center;
-}
-
-.aboutArabic {
-  font-family: 'PP Neue Montreal Arabic';
 }
 
 .aboutDescription {
-  font-size: 14px;
+  font-size: 1.5rem;
   font-weight: normal;    
   color: var(--text-color);
   transition: all 0.3s linear;
-  /* width: 50vw; */
   width: 80vw;
   display: flex;
   flex-direction: column;
 }
 
-/* .aboutPhoto {
-  width: 50vw;
-  display: flex;
-} */
+.aboutTagline {
+  font-size: 1.5rem;
+  color: var(--text-color);
+
+}
 
 @media screen and (max-width: 767px) {
-  .aboutContainer {
-    flex-direction: column;
-    height: auto;
-    flex-wrap: nowrap;
-  }
-
   .aboutTitle {
-    font-size: 30px;
+    font-size: 1.5rem;
     justify-content: space-between;
     width: 80vw;
     flex: 0 0 0;
@@ -60,64 +45,38 @@
   .aboutDescription {
     width: 80vw;
   }
-
-/*   
-  .aboutPhoto {
-    width: 80vw;
-  } */
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-  .aboutContainer {
-    flex-direction: row;
-    height: auto;
-    flex-wrap: wrap;
-  }
-
   .aboutTitle {
-    font-size: 40px;
+    font-size: 1.5rem;
     display: flex;
-    align-self: center;
-    justify-content: space-between;
     width: 50vw;
   }
 
-  /* .aboutPhoto {
-    width: 30vw;
-    align-self: center;
-  } */
-
   .aboutDescription {
-    /* width: 40vw; */
     width: 80vw;
-    padding: 0 5vw;
+    padding: 0 0 1rem 0;
   }
 }
 
 @media screen and (min-width: 1024px) {
 
-  .aboutArabic {
-    font-family: 'PP Neue Montreal Arabic';
-    padding-left: 15rem;
-  }
-
   .aboutTitle {
-    font-size: 30px;
+    font-size: 1.5rem;
     color: var(--text-color);
     transition: all 0.3s linear;
     padding-bottom: 3rem;
     display: flex;
-    align-self: center;
   }
 
   .aboutDescription {
-    font-size: 14px;
+    font-size: 1.5rem;
     font-weight: normal;    
     color: var(--text-color);
     transition: all 0.3s linear;
     width: 80vw;
-    /* width: 40vw; */
-    padding: 0 5vw;
+    padding: 0 0 1rem 0;
     display: flex;
     flex-direction: column;
   }
@@ -126,15 +85,4 @@
     margin: 0 0 2rem 0;
   }
   
-  /* .aboutPhoto {
-    width: 30vw;
-    display: flex;
-    align-self: flex-start;
-  } */
-}
-
-@media screen and (min-width: 1440px) {
-  /* .aboutPhoto {
-    width: 20vw;
-  } */
 }

@@ -1,0 +1,28 @@
+
+.descriptionContainer {
+  display: flex;
+  width: auto;
+  align-items: center;
+}
+
+.descriptionTagline {
+  font-size: 1.5rem;
+  font-weight: normal;    
+  color: var(--text-color-inverted);
+  transition: all 0.3s linear;
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 767px) {
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+
+}
+
+@media screen and (min-width: 1024px) {
+  
+}

@@ -1,183 +1,112 @@
-/* Grid Layout */
-.work {
-  margin: 0 auto;
-  max-width: 160rem;
-}
-
-.workGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columns */
-  gap: 3.5rem;
-}
-
-/* Layout variations */
-.workItem {
-  position: relative;
-  overflow: hidden;
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-}
-
-.workItem mux-player {
-  --controls: none;
-  --center-controls: none;
-  --bottom-play-button: none;
-}
-
-/* Wide (overlay titles) */
-.workItem.wide {
-  grid-column: span 2;
-  aspect-ratio: 16 / 9;
-}
-
-.workTitle.wide {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 2rem;
-  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 60%);
-  color: #fff;
-}
-
-/* Square (overlay titles) */
-.workItem.square {
-  aspect-ratio: 1 / 1;
-}
-
-.workTitle.square {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 2rem;
-  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 60%);
-  color: #fff;
-}
-
-/* Square blocks */
-.workItem.square .workMediaWrapper {
-  width: 100%;
-  height: 100%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-}
-
-.workItem.square .workImage,
-.workItem.square mux-player {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* WideHalf (title below media) */
-.workItem.wideHalf {
-  grid-column: span 1;
-}
-
-.workMediaWrapper {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-}
-
-.workImage,
-mux-player {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.workTitle.wideHalf {
-  position: static;
-  margin-top: 0.5rem;
-  display: flex;
-  padding-right: 2rem;
-  flex-direction: column;
-  gap: 0.2rem;
-  color: var(--text-color);
-}
-
-/* Text styling */
-.workClient {
-  font-family: 'SpaceGrotesk Light';
-  font-size: 1.3rem;
-}
-
-.workProject {
-  font-family: 'SpaceGrotesk Medium';
-  font-size: 2.5rem;
-}
-
-/* Hover effect */
-.workItem:hover img,
-.workItem:hover mux-player {
-  transform: scale(1.02);
-  transition: transform 0.4s ease;
-}
-
-/* Target MuxPlayer inside a wideHalf item */
-.workItem.wideHalf mux-player {
-  aspect-ratio: 16 / 9;
-}
-
 /* =========================================================
-   📱 Responsive layout for screens < 768px
+   🧩 GRID LAYOUT (UNIFORM CARDS)
    ========================================================= */
-@media (max-width: 768px) {
+   .work {
+    margin: 0 auto;
+    padding: 5rem 2rem 0;
+  }
+  
   .workGrid {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3.5rem;
   }
-
+  
+  /* 🖥️ Desktop (≥1024px) — 3 columns */
+  @media (min-width: 1024px) {
+    .workGrid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  /* =========================================================
+     🎬 WORK ITEM
+     ========================================================= */
   .workItem {
-    width: 100%;
-    aspect-ratio: auto;
-  }
-
-  /* Force all to look like .wide layout */
-  .workItem,
-  .workItem.wideHalf,
-  .workItem.square {
-    grid-column: span 2 !important;
     position: relative;
-    aspect-ratio: 16 / 9;
-  }
-
-  .workTitle,
-  .workTitle.wideHalf,
-  .workTitle.square,
-  .workTitle.wide {
-    position: absolute;
-    inset: 0;
+    overflow: hidden;
+    text-decoration: none;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding: 2rem;
-    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 60%);
-    color: #fff;
-    margin: 0;
+  }
+  
+  /* Every work item behaves like "wideHalf" */
+  .workItem {
+    grid-column: span 1;
   }
 
-  /* Make text overlay readable */
-  .workClient {
-    font-size: 1.1rem;
+  .workItem mux-player {
+    --controls: none;
+    --center-controls: none;
+    --bottom-play-button: none;
   }
+  
 
-  .workProject {
-    font-size: 2rem;
+  .workMediaWrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
   }
-
-  /* Ensure media fills the frame */
+  
   .workImage,
   mux-player {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
   }
-}
+  
+  .workItem:hover img,
+  .workItem:hover mux-player {
+    transform: scale(1.02);
+  }
+  
+  /* =========================================================
+     🏷️ TITLE BELOW MEDIA
+     ========================================================= */
+  .workTitle {
+    position: static;
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    color: var(--text-color);
+    padding-right: 1rem;
+  }
+  
+  /* =========================================================
+     ✍️ TEXT STYLING
+     ========================================================= */
+  .workClient {
+    font-family: 'SpaceGrotesk Light';
+    font-size: 0.8rem;
+  }
+  
+  .workProject {
+    font-family: 'SpaceGrotesk Regular';
+    font-size: 1.2rem;
+  }
+  
+  /* =========================================================
+     📱 MOBILE (≤768px)
+     ========================================================= */
+  @media (max-width: 768px) {
+    .workGrid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  
+    .workTitle {
+      margin-top: 0.6rem;
+    }
+  
+    .workClient {
+      font-size: 1.1rem;
+    }
+  
+    .workProject {
+      font-size: 2rem;
+    }
+  }
+  
